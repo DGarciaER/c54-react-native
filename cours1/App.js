@@ -7,6 +7,7 @@
 
 import React from "react";
 import {View, Text, StyleSheet} from "react-native";
+import { createEnumDeclaration } from "typescript";
 
 // composant fonctionnel
 // note: pour passer une expression js pure, il faut l'encapsuler comme ceci: {expression js}
@@ -32,17 +33,43 @@ import {View, Text, StyleSheet} from "react-native";
 // }
 
 // composant de classe
-
 class Chanson extends React.Component {
     render() {
-        const nom = "Reflektor classe";
+        const nom = "Reflektor";
         return (
                 <View style={styles.viewAppearance}>
-                    <Text>{nom}</Text> 
+                    <Text style={styles.textAppearance}>{nom}</Text> 
                 </View>
                 );
     }
 }
+
+class Playlist extends React.Component {
+    render() {
+        return (
+            <View style={styles.flexContainer}>
+                <View>
+                    <Chanson/>
+                    <Chanson/>
+                </View>
+                <View>
+                    <Chanson/>
+                    <Chanson/>
+                </View>  
+            </View>
+        )
+    }
+}
+
+// class Playlist extends React.Component {
+//     render() {
+//         return (
+//             <View>
+//                {creerTab()}
+//             </View>
+//         )
+//     }
+// }
 
 const styles = StyleSheet.create(
     {
@@ -50,11 +77,30 @@ const styles = StyleSheet.create(
             backgroundColor: '#44ee33',
             borderRadius:8,
             margin:10,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+        },
+        textAppearance : {
+            fontSize: 24,
+            fontStyle : 'italic',
+            color: '#ffffff',
+        },
+        flexContainer : {
+            display : "flex",
+            flexDirection : "row",
+            justifyContent : "space-between",
         }
 
-
     }
-) 
+)
+
+function creerTab() {
+    const tab=[];
+    for(let index=0; index < 4; index++)
+        tab.push(<Chanson/>);
+    return tab;
+}
 
 
-export default Chanson;
+export default Playlist; // exporter la classe que l'on veut afficher
