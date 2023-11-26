@@ -35,7 +35,7 @@ import { createEnumDeclaration } from "typescript";
 // composant de classe
 class Chanson extends React.Component {
     render() {
-        const nom = "Reflektor";
+        const nom = "Drones";
         return (
                 <View style={styles.viewAppearance}>
                     <Text style={styles.textAppearance}>{nom}</Text> 

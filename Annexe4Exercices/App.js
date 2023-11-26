@@ -21,18 +21,20 @@ import { liste } from './donnees.js';
 
 function Galerie() {
   const [index, setIndex] = useState(0);
-  // const [affichage, setAffichage] = useState(false);
+  const [affichage, setAffichage] = useState(false);
   // let index = 0;
   let sculpture = liste[index];
   const remoteImage = { uri: sculpture.url };
 
-  // let visible = affichage ? styles.visible : styles.cache;
+  let visible = affichage ? styles.visible : styles.cache;
+  let buttonDescription = affichage ? "Cacher" : "Description";
 
   function handleClick() {
     // index = index + 1;
 
     if (index < liste.length - 1) {
       setIndex(index+1); // index++ ne fonctionne pas...
+      setAffichage(false);
     }
 
     // console.log(index);
@@ -40,12 +42,16 @@ function Galerie() {
 
     if (index == liste.length -1) {
       setIndex(0);
+      setAffichage(false);
     }
+
+    
   }
 
   function handleClickPrecedent() {
     if (0 < index) {
       setIndex(index-1);
+      setAffichage(false);
     }
   }
 
@@ -54,7 +60,7 @@ function Galerie() {
   }
 
   return (
-   <ScrollView content>
+   <ScrollView >
       <View style={styles.main}>
         <View style={styles.buttonsContainer}>
           <TouchableHighlight style={styles.button} onPress={handleClickPrecedent}>
@@ -65,7 +71,6 @@ function Galerie() {
           </TouchableHighlight>
         </View>
     
-        
         <Text>
           {sculpture.name + "de " +sculpture.artist}
         </Text>
@@ -77,8 +82,14 @@ function Galerie() {
       
         <View>
         <TouchableHighlight style={styles.button} onPress={affiche}>
-            <Text style={styles.buttonText}>Description</Text>
+            <Text style={styles.buttonText}>{buttonDescription}</Text>
           </TouchableHighlight>
+        </View>
+
+        <View style={visible}>
+          <Text>
+            {sculpture.desc}
+          </Text>
         </View>
 
       </View>
@@ -113,6 +124,12 @@ const styles = StyleSheet.create(
     buttonText : {
       fontSize: 25,
       color : 'white',
+    },
+    visible : {
+      display: 'flex',
+    },
+    cache : {
+      display: 'none',
     }
   }
 )
