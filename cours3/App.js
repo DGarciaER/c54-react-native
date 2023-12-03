@@ -81,7 +81,7 @@ function App () { // use return with useState, not render!!
       <TouchableHighlight onPress={() => {
           setLike(!like)
       }}>
-        <Image source={imageHeart} style={like ? styles.aime : styles.image}/>
+        <Image source={imageHeart} style={like ? styles.like : styles.unlike}/>
       </TouchableHighlight>
       
       <Text>j'aime ?</Text>
@@ -97,10 +97,10 @@ const styles = StyleSheet.create(
         justifyContent: 'center',
         alignItems: 'center',
       },
-      image : {
+      unlike : {
         tintColor: '#f1f1f1',
       },
-      aime : {
+      like : {
         tintColor: '#FF0000',
       }
   }
